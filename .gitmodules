@@ -4,3 +4,6 @@
 [submodule "third_party/libero"]
 	path = third_party/libero
 	url = https://github.com/Lifelong-Robot-Learning/LIBERO.git
+[submodule "external/curobo"]
+	path = external/curobo
+	url = https://github.com/NVlabs/curobo.git
