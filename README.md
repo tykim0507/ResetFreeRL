@@ -1,4 +1,4 @@
-# openpi
+# curobo motion planning in libero
 
 openpi holds open-source models and packages for robotics, published by the [Physical Intelligence team](https://www.physicalintelligence.company/).
 
@@ -53,6 +53,24 @@ NOTE: `GIT_LFS_SKIP_SMUDGE=1` is needed to pull LeRobot as a dependency.
 
 **Docker**: As an alternative to uv installation, we provide instructions for installing openpi using Docker. If you encounter issues with your system setup, consider using Docker to simplify installation. See [Docker Setup](docs/docker.md) for more details.
 
+
+
+## Libero + curobo: setup and run
+
+```bash
+# Create virtual environment
+uv venv --python 3.10 examples/libero/.curobo
+source examples/libero/.venv/bin/activate
+uv pip sync examples/libero/requirements.txt third_party/libero/requirements.txt
+uv pip install -e packages/openpi-client
+uv pip install -e third_party/libero
+uv pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130  //install pytorch depending on your nvidia driver 
+uv pip install -e external/curobo --no-build-isolation   //caveat: curobo requires the same version of nvidia driver and the toolkit
+export PYTHONPATH=$PYTHONPATH:$PWD/third_party/libero
+
+# Run the simulation
+python examples/libero/visualize_motion_planning.py
+```
 
 
 
